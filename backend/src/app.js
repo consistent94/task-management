@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const pool = require('./config/db');
+
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
@@ -8,9 +9,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Basic route
-app.get('/', (req, res) => {
-    res.json({ message: 'Welcome to Task Management API' });
+// Routes
+app.use('/auth', authRoutes);
+
+//Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'Server error' });
 });
 
 // Start server
