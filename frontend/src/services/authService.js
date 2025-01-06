@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { get } from '../../../backend/src/app';
 
 const API_URL = 'http://localhost:5001/api/auth'; 
 
